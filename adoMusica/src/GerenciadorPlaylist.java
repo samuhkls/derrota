@@ -25,49 +25,108 @@ public class GerenciadorPlaylist {
         for(Musica i : musicas){
             System.out.println("musica: " + i.getNome());
             System.out.println("artista: " + i.getArtista());
+            System.out.println("avaliacao: " + i.getAvaliacao());
+            System.out.println("duracao: " + i.getMinutos());
         }
     }
 
-    public void ordenar(int criterio){
-            if(criterio ==1){
-                ordenarPorNome();
-            }
-    }
+//    public void ordenar(int criterio){
+//            if(criterio ==1){
+//                ordenarPorNome();
+//            } else if (criterio==2) {
+//                ordenarPorTempo();
+//            }
+//    }
 
     public void ordenarPorNome(){
         int tamanho = musicas.size();
-        Musica msc = new Musica();
+
         for(int posicao = 1; posicao < tamanho; posicao ++){
 
             Musica musica = musicas.get(posicao);
-            String musicanome = "";
-            musicanome = musica.getNome();
-            Musica anterior = musicas.get(posicao -1);
-            String anteriornome = "";
-            anteriornome = anterior.getNome();
-            //anterior.equals(posicao -1);
+            String musicanome = musica.getNome();
+            int j = posicao - 1;
 
-            int x = 0;
-            x = anteriornome.compareTo(musicanome);
-            while (x < 0){
-                String armazena = "";
-                armazena = anteriornome;
-                int armazenaindex = 0;
-                armazenaindex = musicas.indexOf(anterior);
+            // comparando a musica na posicao j com a proxima
+            while (j >= 0 && musicanome.compareTo(musicas.get(j).getNome()) < 0){
 
-                int musicanomeindex = 0;
-                musicanomeindex = musicas.indexOf(musica);
-                musica.getNome();
+                Musica armazena = musicas.get(j);
+                Musica prox = musicas.get(j + 1); // compara a musica na posicao j(armazena) com a na posicao j  + 1(prox)
+                musicas.set(j, prox);
+                musicas.set(j + 1, armazena);
+                j--; // ja que a musica trocou de posicao, precisamos decrementar o valor de j para continuar comparando com o proximo elemento
 
-                msc = musicas.get(armazenaindex);
-                musicas.set(armazenaindex,msc);
-                msc = musicas.get(musicanomeindex);
-                musicas.set(musicanomeindex,msc);
-                x = 1;
             }
 
+        }
+    }
+    public void ordenarPorTempoMenor(){
+        int tamanho = musicas.size();
 
+        for(int posicao = 1; posicao < tamanho; posicao++){
+            Musica musica = musicas.get(posicao);
+            int duracao = musica.getMinutos();
+            int j = posicao - 1;
 
+            while(j>=0 && duracao < musicas.get(j).getMinutos()){
+                Musica armazena = musicas.get(j);
+                Musica prox = musicas.get(j + 1);
+                musicas.set(j, prox);
+                musicas.set(j + 1, armazena);
+                j--;
+            }
+
+        }
+    }
+    public void ordenarPorTempoMaior(){
+        int tamanho = musicas.size();
+
+        for(int posicao = 1; posicao < tamanho; posicao++){
+            Musica musica = musicas.get(posicao);
+            int duracao = musica.getMinutos();
+            int j = posicao - 1;
+
+            while(j>=0 && duracao > musicas.get(j).getMinutos()){
+                Musica armazena = musicas.get(j);
+                Musica prox = musicas.get(j + 1);
+                musicas.set(j, prox);
+                musicas.set(j + 1, armazena);
+                j--;
+            }
+
+        }
+    }
+    public void ordenarPorAvaliacaoMenor(){
+        int tamanho = musicas.size();
+
+        for(int posicao = 1; posicao < tamanho; posicao++){
+            Musica musica = musicas.get(posicao);
+            double avaliacao = musica.getAvaliacao();
+            int j = posicao - 1;
+
+            while(j>=0 && avaliacao < musicas.get(j).getAvaliacao()){
+                Musica armazena = musicas.get(j);
+                Musica prox = musicas.get(j + 1);
+                musicas.set(j, prox);
+                musicas.set(j + 1, armazena);
+                j--;
+            }
+        }
+    }    public void ordenarPorAvaliacaoMaior() {
+        int tamanho = musicas.size();
+
+        for (int posicao = 1; posicao < tamanho; posicao++) {
+            Musica musica = musicas.get(posicao);
+            double avaliacao = musica.getAvaliacao();
+            int j = posicao - 1;
+
+            while (j >= 0 && avaliacao > musicas.get(j).getAvaliacao()) {
+                Musica armazena = musicas.get(j);
+                Musica prox = musicas.get(j + 1);
+                musicas.set(j, prox);
+                musicas.set(j + 1, armazena);
+                j--;
+            }
         }
     }
 

@@ -30,6 +30,10 @@ public class Main {
                 m1.setNome(ler.nextLine());
                 System.out.println("digite o nome do artista: ");
                 m1.setArtista(ler.nextLine());
+                System.out.println("digite a avaliacao da musica: ");
+                m1.setAvaliacao(Double.parseDouble(ler.nextLine()));
+                System.out.println("digite a duracao da musica em minutos: ");
+                m1.setMinutos(Integer.parseInt(ler.nextLine()));
                 gerencia.adicionar(m1);
                 break;
             case 2:
@@ -48,7 +52,35 @@ public class Main {
                 gerencia.exibirPlaylist();
                 break;
             case 5:
-                gerencia.ordenarPorNome();
+                ler.nextLine();
+                System.out.println("Por qual criterio voce vai ordenar? \n1. nome\n2. duracao\n3. avaliacao");
+                String input = ler.nextLine();
+                int criterio = Integer.parseInt(input);
+                if(criterio == 1){
+                    gerencia.ordenarPorNome();
+                } else if (criterio == 2) {
+                    System.out.println("Ordenar por maior(1) ou menor(2) duracao?");
+                    input = ler.nextLine();
+                    criterio = Integer.parseInt(input);
+
+                    if(criterio == 1){
+                        gerencia.ordenarPorTempoMaior();
+                    }else{
+                        gerencia.ordenarPorTempoMenor();
+                    }
+
+                } else if (criterio == 3) {
+                    System.out.println("Ordenar por maior(1) ou menor(2) avaliacao?");
+                    input = ler.nextLine();
+                    criterio = Integer.parseInt(input);
+
+                    if(criterio == 1){
+                        gerencia.ordenarPorAvaliacaoMaior();
+                    }else{
+                        gerencia.ordenarPorAvaliacaoMenor();
+                    }
+
+                }
             case 0:
                 //numero = 0;
                 break;
